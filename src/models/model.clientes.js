@@ -34,7 +34,7 @@ const clientesSchema = new mongoose.Schema({
     password:{
         type: String,
         required: true,
-        select:false,
+        minLength:8,
     },
     createAt:{
         type: Date,

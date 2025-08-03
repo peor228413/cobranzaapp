@@ -1,7 +1,8 @@
 const express = require("express");
 const createError = require("http-errors");
 
-const clientesUsecases = require("../usecases/clientes.usecases")
+const clientesUsecases = require("../usecases/clientes.usecases");
+const auth= require("../middlewares/auth");
 const router = express.Router();
 
 //Crear un usuario
@@ -25,7 +26,7 @@ router.post("/", async (request, response)=>{
 })
 
 //Obtener todos los usuarios
-router.get("/", async (request, response) => {
+router.get("/",auth, async (request, response) => {
   try {
     const cliente = await clientesUsecases.getAll();
 
@@ -108,5 +109,45 @@ router.delete("/:id", async (request, response)=>{
         })
     }
 })
+
+router.post("/signup", async (request, response)=>{
+    try {
+        const data = request.body;
+        const cliente = clientesUsecases.signUp(data);
+
+        response.json({
+            success : true,
+            message: "Cliente creado",
+            data: {cliente},
+
+        })
+    } catch (error) {
+        response.status (error.status || 500);
+        response.json({
+            success: false,
+            message: error.message,
+        })
+    }
+})
+
+router.post("/login", async (request, response)=>{
+    try {
+         const data = request.body;
+        const token = await clientesUsecases.login(data)
+
+        response.json({
+            success : true,
+            message: "Cliente Logeado",
+            data:{token},
+
+        })
+    } catch (error) {
+        response.status (error.status || 500);
+        response.json({
+            success: false,
+            message: error.message,
+        });        
+    }
+});
 
 module.exports = router

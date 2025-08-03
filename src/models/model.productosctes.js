@@ -1,20 +1,18 @@
 const mongoose = require("mongoose")
 
-const productos = new mongoose.Schema({
+const productos = new mongoose.Schema({  
     tipoCredito:{
         type: String, 
         required: true,
         minLength:4,
         maxLength:100,
     },
-
     monto:{
         type: Number,
         required:true,
         minLength:5,
         maxLength:100,
     },
-    
     interes:{
         type: Number,
         required: true,        

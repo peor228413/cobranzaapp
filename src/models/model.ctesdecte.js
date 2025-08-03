@@ -31,9 +31,9 @@ const cltesDeCtesSchema = new mongoose.Schema({
         minLength: 5,
         maxLength: 50,
     },
-    aval:{
+    clientes:{
         type: mongoose.Schema.Types.ObjectId,
-        required: false,
+        required: true,
         ref:"clientes",
     },
     

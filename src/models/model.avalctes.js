@@ -37,6 +37,7 @@ const avalCtes = new mongoose.Schema({
         minLength: 5,
         maxLength: 50,
     },
+    
     enlaceIne:{
         type: String,
         required: false,

@@ -1,5 +1,54 @@
 const clientes = require("../models/model.clientes");
 const createError = require("http-errors");
+const encryption = require("../lib/encription");
+const jwt = require("../lib/jwt");
+
+// validar usuario
+
+async function login (data){
+    const cliente = await clientes.findOne({email: data.email}).select("+password");
+
+    if(!cliente){
+        throw createError(401, "Usuario no encontrado");
+    }
+
+    const isValidPassword = encryption.compare(data.password, cliente.password);
+
+    if(!isValidPassword){
+        throw createError(401, "Contraseña invalida");
+    } 
+
+    const token = jwt.sign({id: cliente.id})
+
+    return token;
+} 
+
+// Autenticar el cliente
+
+async function signUp(data){
+
+    const clienteFound = await clientes.findOne({email:data.email});
+        if(clienteFound){
+            throw createError(409, "Cliente ya existe")
+        }
+
+        if (!data.password){
+            throw createError(400, "La contraseña es requerida")
+        }
+
+        if (data.password.length < 8){
+            throw createError(400, "La contraseña debe tener al menos 8 caracteres")
+        }
+        const password =  encryption.encript(data.password);
+        data.password = password;
+        const nuevoCliente = clientes.create(data)
+        console.log(nuevoCliente)
+
+        return nuevoCliente;
+
+
+}
+
 
 
 // Creacion de un nuevo cliente
@@ -13,7 +62,6 @@ async function create(data){
 
 async function getAll(){
     const clienteAll = await clientes.find({});
-    console.log(clienteAll);
     return clienteAll;
 }
 
@@ -53,6 +101,8 @@ module.exports={
     getAll,
     getbyId,
     updateById, 
-    deleteById
+    deleteById,
+    signUp,
+    login,
 }
 

@@ -2,6 +2,7 @@ const ctedectes = require("../models/model.ctesdecte");
 const createError = require("http-errors");
 
 
+
 // Creacion de un nuevo cliente
 
 async function create(data){
@@ -12,8 +13,7 @@ async function create(data){
 // Obtener todos los clientes registrados
 
 async function getAll(){
-    const clienteAll = await ctedectes.find({});
-    console.log(clienteAll);
+    const clienteAll = await ctedectes.find().populate("clientes");
     return clienteAll;
 }
 
