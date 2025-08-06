@@ -1,8 +1,9 @@
 const jsonwebtoken = require("jsonwebtoken");
-//const secret = process.env.JWT_SECRET;
+const secret = 'doni9705';
+
 
 function sign(payload){
-    return jsonwebtoken.sign(payload, 'doni9705', {expiresIn: '2h'} );
+    return jsonwebtoken.sign(payload, secret, {expiresIn: '2h'} );
 
 }
 

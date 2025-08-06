@@ -6,7 +6,7 @@ const auth= require("../middlewares/auth");
 const router = express.Router();
 
 //Crear un usuario
-router.post("/", async (request, response)=>{
+router.post("/",async (request, response)=>{
     try {
         const clienteData = request.body;
         const newcliente = await clientesUsecases.create(clienteData);
@@ -26,7 +26,7 @@ router.post("/", async (request, response)=>{
 })
 
 //Obtener todos los usuarios
-router.get("/",auth, async (request, response) => {
+router.get("/", auth, async (request, response) => {
   try {
     const cliente = await clientesUsecases.getAll();
 
@@ -43,7 +43,7 @@ router.get("/",auth, async (request, response) => {
     });
   }
 });//Obtener un usuario por id
-router.get("/:id", async (request, response)=>{
+router.get("/:id",auth,  async (request, response)=>{
     try {
         const id = request.params.id;
         const cliente = await clientesUsecases.getbyId(id)
