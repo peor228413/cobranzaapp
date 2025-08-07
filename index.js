@@ -1,7 +1,7 @@
 const server = require("./src/server");
 const db = require("./src/lib/db");
 
-const port = process.ENV.PORT || 3010;
+const port = 3010;
 
 db.connect()
 .then(()=>{
