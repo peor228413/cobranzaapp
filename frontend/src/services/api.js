@@ -1,5 +1,5 @@
 // src/services/api.js
-const BASE = ""; // usamos el proxy de Vite: /api -> http://localhost:3000
+const BASE = "http://localhost:3000"; // usamos el proxy de Vite: /api -> http://localhost:3000
 
 function getToken() {
   return localStorage.getItem("token");
