@@ -1,29 +1,28 @@
-import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
 import Clientes from "./pages/Clientes";
+import Login from "./pages/Login";
+import PrivateRoute from "./components/PrivateRoute";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route index element={<Dashboard />} />
-          <Route path="/clientes" element={<Clientes />} />
-          {/* puedes ir sumando: /ctedectes, /avales, /productos */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+      <Routes>
+        {/* Rutas públicas */}
+        <Route path="/login" element={<Login />} />
 
-        {/* Quick links temporales si aún no bindearon el Sidebar */}
-        <div className="mt-6 flex gap-3 text-sm text-sky-700">
-          <Link className="underline" to="/">
-            Dashboard
-          </Link>
-          <Link className="underline" to="/clientes">
-            Clientes
-          </Link>
-        </div>
-      </Layout>
+        {/* Rutas protegidas envueltas con Layout */}
+        <Route element={<Layout />}>
+          <Route element={<PrivateRoute />}>
+            <Route index element={<Dashboard />} />
+            <Route path="/clientes" element={<Clientes />} />
+          </Route>
+
+          {/* 404 -> redirige */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }

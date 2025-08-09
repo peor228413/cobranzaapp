@@ -1,4 +1,7 @@
+import { useAuth } from "../context/AuthContext";
+
 export default function Topbar({ onToggleSidebar }) {
+  const { logout } = useAuth();
   return (
     <header className="h-14 sticky top-0 z-40 border-b bg-white/80 backdrop-blur">
       <div className="h-full px-4 flex items-center gap-3">
@@ -7,7 +10,6 @@ export default function Topbar({ onToggleSidebar }) {
           className="md:hidden inline-flex items-center justify-center rounded-lg border px-2.5 py-1.5 hover:bg-slate-50"
           aria-label="Toggle sidebar"
         >
-          {/* ícono menú (hamburger) */}
           <svg
             width="20"
             height="20"
@@ -29,10 +31,12 @@ export default function Topbar({ onToggleSidebar }) {
         </div>
 
         <div className="ml-auto flex items-center gap-3">
-          <span className="hidden sm:block text-sm text-slate-600">
-            Hola, Néstor
-          </span>
-          <div className="size-8 rounded-full bg-slate-200" />
+          <button
+            onClick={logout}
+            className="text-sm rounded-lg border px-3 py-1.5 hover:bg-slate-50"
+          >
+            Salir
+          </button>
         </div>
       </div>
     </header>

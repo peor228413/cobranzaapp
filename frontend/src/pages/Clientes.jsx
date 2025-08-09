@@ -6,22 +6,20 @@ export default function Clientes() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    async function load() {
+    (async () => {
       try {
         setState("loading");
         const res = await fetch("/api/clientes"); // proxy de Vite
         if (!res.ok) throw new Error("No se pudo obtener clientes");
         const json = await res.json();
-        // si tu backend responde { success, data } ajusta aquí:
         const list = Array.isArray(json) ? json : json.data || [];
         setData(list);
         setState("success");
-      } catch (err) {
-        setError(err.message || "Error desconocido");
+      } catch (e) {
+        setError(e?.message || "Error desconocido");
         setState("error");
       }
-    }
-    load();
+    })();
   }, []);
 
   if (state === "loading") {
@@ -65,9 +63,7 @@ export default function Clientes() {
   return (
     <section className="space-y-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
-          Clientes
-        </h1>
+        <h1 className="text-3xl font-bold tracking-tight">Clientes</h1>
         <button className="px-4 py-2 rounded-lg bg-sky-600 text-white hover:bg-sky-700">
           Nuevo cliente
         </button>
