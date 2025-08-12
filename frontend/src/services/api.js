@@ -21,7 +21,7 @@ export async function apiFetch(path, options = {}) {
 }
 
 export async function login({ email, password }) {
-  const res = await fetch("/api/clientes/login", {
+  const res = await fetch("http://localhost:3000/clientes/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),

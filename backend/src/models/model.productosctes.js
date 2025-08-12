@@ -23,6 +23,24 @@ const productos = new mongoose.Schema({
         minLength: 5,
         maxLength: 50,
     },
+    montoPagos:{
+        type: Number,
+        required:true,
+        minLength:5,
+        maxLength:100,
+    },
+
+    ctedectes:{
+            type: mongoose.Schema.Types.ObjectId,
+            required:false,
+            ref:"ctesdeCtes",
+        },
+    avalcte:{
+            type: mongoose.Schema.Types.ObjectId,
+            required:false,
+            ref:"avalCtes",
+        },
+    
     fechaInicio:{
         type: String,
         required: true,        

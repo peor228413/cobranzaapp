@@ -11,7 +11,7 @@ async function create(data){
 // Obtener todos los clientes registrados
 
 async function getAll(){
-    const productosTotales = await productosCtes.find({});
+    const productosTotales = await productosCtes.find().populate("ctedectes");
     return productosTotales;
 }
 

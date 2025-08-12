@@ -33,7 +33,7 @@ const cltesDeCtesSchema = new mongoose.Schema({
     },
     clientes:{
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        required: false,
         ref:"clientes",
     },
     

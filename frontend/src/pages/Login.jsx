@@ -1,24 +1,24 @@
 import { useState } from "react";
-//import { useAuth } from "../context/AuthContext";
-//import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  //const { login, loading } = useAuth();
-  //const navigate = useNavigate();
-  //const [form, setForm] = useState({ email: "", password: "" });
-  //const [error, setError] = useState("");
+  const { login, loading } = useAuth();
+  const navigate = useNavigate();
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
 
-  //async function onSubmit(e) {
-  //  e.preventDefault();
-  //  setError("");
-  //  if (!form.email || !form.password) {
-  //    setError("Email y contraseña son obligatorios");
-  //    return;
-  //  }
-  //  const { ok, message } = await login(form);
-  //  if (ok) navigate("/", { replace: true });
-  //  else setError(message || "Error al iniciar sesión");
-  //}
+  async function onSubmit(e) {
+    e.preventDefault();
+    setError("");
+    if (!form.email || !form.password) {
+      setError("Email y contraseña son obligatorios");
+      return;
+    }
+    const { ok, message } = await login(form);
+    if (ok) navigate("/", { replace: true });
+    else setError(message || "Error al iniciar sesión");
+  }
 
   return (
     <div className="min-h-screen grid place-items-center bg-slate-50">
