@@ -1,3 +1,4 @@
+const modelClientes = require("../models/model.clientes");
 const ctedectes = require("../models/model.ctesdecte");
 const createError = require("http-errors");
 
@@ -13,7 +14,10 @@ async function create(data){
 // Obtener todos los clientes registrados
 
 async function getAll(){
-    const clienteAll = await ctedectes.find().populate("clientes");
+    const id = '689537954c8b918ae5b9734c'
+    const clienteAll = await ctedectes.find()
+                        .where('clientes').equals(id)
+                        .select('nombre direccion')                   
     return clienteAll;
 }
 

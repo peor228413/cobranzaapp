@@ -27,13 +27,15 @@ router.post("/", async (request, response)=>{
 //Obtener todos los usuarios
 router.get("/", async (request, response) => {
   try {
-    const cliente = await ctedectesUsecases.getAll();
-
+    const clientes = await ctedectesUsecases.getAll()    
+     console.log (clientes)
     response.json({
       success: true,
       message: "Todos los clientes",
-      data: { cliente },
+      data: { clientes },
+    
     });
+    
   } catch (error) {
     response.status(error.status || 500);
     response.json({
@@ -42,6 +44,7 @@ router.get("/", async (request, response) => {
     });
   }
 });//Obtener un usuario por id
+
 router.get("/:id", async (request, response)=>{
     try {
         const id = request.params.id;

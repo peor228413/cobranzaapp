@@ -6,8 +6,7 @@ const jwt = require("../lib/jwt");
 // validar usuario
 
 async function login (data){
-    const cliente = await clientes.findOne({email: data.email}).select("+password");
-
+    const cliente = await clientes.findOne({email: data.email}).select("+password ");
     if(!cliente){
         throw createError(401, "Usuario no encontrado");
     }
@@ -48,8 +47,6 @@ async function signUp(data){
 
 
 }
-
-
 
 // Creacion de un nuevo cliente
 
@@ -94,8 +91,7 @@ async function deleteById(id){
     return cliente;
 }
 
-
-
+ 
 module.exports={
     create,
     getAll,
