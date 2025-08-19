@@ -11,7 +11,9 @@ async function create(data){
 // Obtener todos los clientes registrados
 
 async function getAll(){
-    const productosTotales = await productosCtes.find().populate("ctedectes");
+    const productosTotales = await productosCtes.find()
+                        .select('nombre direccion')                   
+ 
     return productosTotales;
 }
 
@@ -24,7 +26,6 @@ async function getbyId(id){
 // Modificar cliente por id especifico
  async function updateById(id, newData) {
     const productoFound = await productosCtes.findById(id);
-    console.log(productoFound)
     if(!productoFound){
         throw createError(401, "Cliente no encontrado");
     }

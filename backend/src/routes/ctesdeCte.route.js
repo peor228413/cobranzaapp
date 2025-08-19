@@ -28,7 +28,7 @@ router.post("/", async (request, response)=>{
 router.get("/", async (request, response) => {
   try {
     const clientes = await ctedectesUsecases.getAll()    
-     console.log (clientes)
+    
     response.json({
       success: true,
       message: "Todos los clientes",
