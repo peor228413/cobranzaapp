@@ -4,6 +4,9 @@ import Dashboard from "./pages/Dashboard";
 import Clientes from "./pages/Clientes";
 import Login from "./pages/Login";
 import PrivateRoute from "./components/PrivateRoute";
+import Productos from "./pages/Productos";
+import Cuentas from "./pages/Cuentas";
+import Avales from "./pages/Avales";
 
 export default function App() {
   return (
@@ -17,6 +20,9 @@ export default function App() {
           <Route element={<PrivateRoute />}>
             <Route index element={<Dashboard />} />
             <Route path="/clientes" element={<Clientes />} />
+            <Route path="/productos" element={<Productos />} />
+            <Route path="/cuentas" element={<Cuentas />} />
+            <Route path="/avales" element={<Avales />} />
           </Route>
 
           {/* 404 -> redirige */}

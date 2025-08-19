@@ -3,6 +3,9 @@ import { NavLink } from "react-router-dom";
 const links = [
   { key: "dashboard", label: "Dashboard", path: "/" },
   { key: "clientes", label: "Clientes", path: "/clientes" },
+  { key: "cuentas", label: "Cuentas", path: "/cuentas" },
+  { key: "productos", label: "Productos", path: "/productos" },
+  { key: "avales", label: "Avales", path: "/avales" },
   // luego: cuentas, avales, productos…
 ];
 
