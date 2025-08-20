@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
+import Login from "./pages/Login";
 import Layout from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
 import Clientes from "./pages/Clientes";
-import Login from "./pages/Login";
-import PrivateRoute from "./components/PrivateRoute";
 import Productos from "./pages/Productos";
 import Cuentas from "./pages/Cuentas";
 import Avales from "./pages/Avales";
@@ -12,10 +12,10 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Rutas públicas */}
+        {/* Pública */}
         <Route path="/login" element={<Login />} />
 
-        {/* Rutas protegidas envueltas con Layout */}
+        {/* Protegidas */}
         <Route element={<Layout />}>
           <Route element={<PrivateRoute />}>
             <Route index element={<Dashboard />} />
@@ -25,7 +25,7 @@ export default function App() {
             <Route path="/avales" element={<Avales />} />
           </Route>
 
-          {/* 404 -> redirige */}
+          {/* Fallback */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>

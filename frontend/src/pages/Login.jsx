@@ -26,9 +26,9 @@ export default function Login() {
         onSubmit={onSubmit}
         className="w-full max-w-sm rounded-2xl border bg-white p-6 shadow-sm"
       >
-        <h1 className="text-2xl font-bold tracking-tight">Iniciar sesión</h1>
+        <h1 className="text-2xl font-bold">Iniciar sesión</h1>
         <p className="mt-1 text-sm text-slate-600">
-          Accede con tu cuenta de cliente.
+          Accede con tus credenciales.
         </p>
 
         <div className="mt-5 space-y-3">
@@ -38,12 +38,11 @@ export default function Login() {
             </label>
             <input
               type="email"
-              className="mt-1 w-full rounded-lg border px-3 py-2 outline-none ring-slate-200 focus:ring-2"
+              className="mt-1 w-full rounded-lg border px-3 py-2 outline-none focus:ring-2"
               value={form.email}
               onChange={(e) =>
                 setForm((f) => ({ ...f, email: e.target.value }))
               }
-              placeholder="tu@email.com"
               autoComplete="email"
             />
           </div>
@@ -54,12 +53,11 @@ export default function Login() {
             </label>
             <input
               type="password"
-              className="mt-1 w-full rounded-lg border px-3 py-2 outline-none ring-slate-200 focus:ring-2"
+              className="mt-1 w-full rounded-lg border px-3 py-2 outline-none focus:ring-2"
               value={form.password}
               onChange={(e) =>
                 setForm((f) => ({ ...f, password: e.target.value }))
               }
-              placeholder="********"
               autoComplete="current-password"
             />
           </div>
