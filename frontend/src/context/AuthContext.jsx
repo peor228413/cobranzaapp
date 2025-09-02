@@ -1,43 +1,33 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { login as loginRequest } from "../services/api";
+import { createContext, useContext, useMemo, useState } from "react";
+import {
+  login as loginRequest,
+  logout as logoutRequest,
+} from "../services/api";
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(() => localStorage.getItem("token"));
-  const [loading, setLoading] = useState(false);
-  const isAuth = Boolean(token);
+  const isAuth = !!token;
 
-  useEffect(() => {
-    if (token) localStorage.setItem("token", token);
-    else localStorage.removeItem("token");
-  }, [token]);
-
-  async function login(credentials) {
-    setLoading(true);
-    try {
-      const t = await loginRequest(credentials);
-      setToken(t);
-      return { ok: true };
-    } catch (e) {
-      return { ok: false, message: e.message };
-    } finally {
-      setLoading(false);
-    }
+  async function login(email, password) {
+    const t = await loginRequest({ email, password });
+    localStorage.setItem("token", t);
+    setToken(t);
+    return t;
   }
 
   function logout() {
+    logoutRequest();
     setToken(null);
   }
 
-  const value = useMemo(
-    () => ({ token, isAuth, loading, login, logout }),
-    [token, isAuth, loading]
-  );
-
+  const value = useMemo(() => ({ token, isAuth, login, logout }), [token]);
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 export function useAuth() {
-  return useContext(AuthContext);
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error("useAuth debe usarse dentro de <AuthProvider>");
+  return ctx;
 }
