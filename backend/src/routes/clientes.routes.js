@@ -26,7 +26,7 @@ router.post("/",async (request, response)=>{
 })
 
 //Obtener todos los usuarios
-router.get("/", auth, async (request, response) => {
+router.get("/",  async (request, response) => {
   try {
     const cliente = await clientesUsecases.getAll();
 
