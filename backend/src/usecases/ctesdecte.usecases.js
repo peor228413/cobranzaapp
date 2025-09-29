@@ -1,3 +1,4 @@
+const acreedor = require ("../models/model.clientes")
 const ctedectes = require("../models/model.ctesdecte");
 const createError = require("http-errors");
 
@@ -13,14 +14,18 @@ async function create(data){
 // Obtener todos los clientes registrados
 
 async function getAll(){
-    const clienteAll = await ctedectes.find().populate("clientes");
+    const clienteAll = await ctedectes.find()
+                       .where('clientes').equals('689537954c8b918ae5b9734c')
+                       .select('nommbre direccion telefono email curp')
     return clienteAll;
 }
 
 // Obtener un cliente por id especifico
 async function getbyId(id){
-    const cliente = await ctedectes.findById(id);
-    return cliente;
+    const cliente = await ctedectes.find()
+                    .where('clientes').equals(id)
+                    .select('nombre  telefono email curp createAt')
+        return cliente;
 }
 
 // Modificar cliente por id especifico

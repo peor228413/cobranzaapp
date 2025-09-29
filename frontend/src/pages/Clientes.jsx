@@ -4,7 +4,7 @@ import {
   updateCliente,
   deleteCliente,
 } from "../services/clientes";
-import { apiFetch } from "../services/api"; // lo usamos para debug si hace falta
+//import { apiFetch } from "../services/api"; // lo usamos para debug si hace falta
 
 export default function Clientes() {
   const [data, setData] = useState([]);

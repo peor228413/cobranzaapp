@@ -1,10 +1,25 @@
 import { apiFetch } from "./api";
 
+function extractList(json) {
+  return Array.isArray(json?.data?.cliente)
+    ? json.data.cliente
+    : Array.isArray(json?.data)
+    ? json.data
+    : Array.isArray(json)
+    ? json
+    : [];
+}
+
 export async function getCuentas() {
-  const res = await apiFetch("/api/ctedectes");
-  if (!res.ok) throw new Error("No se pudo obtener cuentas");
-  const json = await res.json();
-  return Array.isArray(json) ? json : json.data || [];
+  const res = await apiFetch("/api/ctedectes/689537954c8b918ae5b9734c");
+   const text = await res.text();
+   let json;
+   try {
+     json = JSON.parse(text);
+   } catch {
+     throw new Error("Respuesta no es JSON");
+   }
+   return extractList(json);
 }
 
 export async function createCuenta(data) {
